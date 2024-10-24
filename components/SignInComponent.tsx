@@ -1,12 +1,18 @@
 "use client";
 
-import { SignIn } from "@clerk/nextjs";
-import { useEffect, useState } from "react";
+import { SignIn, useAuth } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
-export default function SignInComponent({ hasBookingData }) {
+interface SignInComponentProps {
+  hasBookingData: boolean;
+}
+
+export default function SignInComponent({
+  hasBookingData,
+}: SignInComponentProps) {
   const router = useRouter();
-  const [isSignedIn, setIsSignedIn] = useState(false);
+  const { isSignedIn } = useAuth(); // Using Clerk's useAuth hook to get sign-in state
 
   useEffect(() => {
     if (isSignedIn) {
@@ -26,7 +32,6 @@ export default function SignInComponent({ hasBookingData }) {
       fallbackRedirectUrl={
         hasBookingData ? "/dashboard/booking-confirmation" : "/dashboard"
       }
-      onSignInSuccess={() => setIsSignedIn(true)}
     />
   );
 }

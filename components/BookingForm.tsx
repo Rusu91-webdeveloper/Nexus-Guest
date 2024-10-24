@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
@@ -15,6 +16,8 @@ import {
 import { toast } from "react-toastify";
 import { createBooking } from "@/app/actions/actions";
 import CancellationOverlay from "./CancellationOverlay";
+
+type PaymentMethod = "credit_card" | "paypal" | "bank_transfer";
 
 interface BookingFormProps {
   userId: string;
@@ -45,6 +48,19 @@ export default function BookingForm({
 
   async function handleSubmit(formData: FormData) {
     setIsPending(true);
+    const paymentMethod = formData.get("payment_method");
+
+    if (
+      !paymentMethod ||
+      !["credit_card", "paypal", "bank_transfer"].includes(
+        paymentMethod as string
+      )
+    ) {
+      toast.error("Invalid payment method selected");
+      setIsPending(false);
+      return;
+    }
+
     const bookingData = {
       staff_name: userName,
       staff_id: userId,
@@ -53,7 +69,7 @@ export default function BookingForm({
       guest_name: formData.get("guest_name") as string,
       guest_email: formData.get("guest_email") as string,
       guest_card_number: formData.get("guest_card_number") as string,
-      payment_method: formData.get("payment_method") as string,
+      payment_method: paymentMethod as PaymentMethod,
       guests_quantity: Number(formData.get("guests_quantity")),
       checkIn_date: checkInDate,
       checkOut_date: checkOutDate,

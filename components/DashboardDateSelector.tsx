@@ -35,7 +35,10 @@ import { RoomType, Room, RoomTypeDetails } from "./DateSelector";
 import "react-day-picker/dist/style.css";
 
 type RoomTypes = Record<RoomType, RoomTypeDetails>;
-
+type DateRange = {
+  from?: Date;
+  to?: Date;
+};
 const DateSelector = ({ rooms }: { rooms: Room[] }) => {
   const router = useRouter();
   const [selectedRange, setSelectedRange] = useState<{
@@ -61,8 +64,14 @@ const DateSelector = ({ rooms }: { rooms: Room[] }) => {
     Cookies.remove("dashboardBookingDetails");
   }, []);
 
-  const handleSelect = (range: { from: Date; to: Date } | undefined) =>
-    setSelectedRange(range || null);
+  const handleSelect = (range: DateRange | undefined) => {
+    if (range && range.from && range.to) {
+      setSelectedRange({ from: range.from, to: range.to });
+    } else {
+      setSelectedRange(null);
+    }
+  };
+
   const handleGuestChange = (value: number) => setGuestCount(value);
 
   const handleSearch = () => {
@@ -163,7 +172,7 @@ const DateSelector = ({ rooms }: { rooms: Room[] }) => {
             <DayPicker
               disabled={{ before: new Date() }}
               mode="range"
-              selected={selectedRange}
+              selected={selectedRange || undefined}
               onSelect={handleSelect}
               className="border rounded-md bg-white/20"
             />

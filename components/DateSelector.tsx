@@ -50,6 +50,11 @@ export interface Room {
   pictures: string[];
 }
 
+type DateRange = {
+  from?: Date;
+  to?: Date;
+};
+
 export interface RoomTypeDetails {
   rooms: Room[];
   minPrice: number | null;
@@ -76,10 +81,16 @@ const DateSelector = ({ rooms }: { rooms: Room[] }) => {
   });
   const [showRooms, setShowRooms] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleSelect = (range: { from: Date; to: Date } | undefined) =>
-    setSelectedRange(range || null);
-  const handleGuestChange = (value: number) => setGuestCount(value);
+  const handleGuestChange = (value: number) => {
+    setGuestCount(value);
+  };
+  const handleSelect = (range: DateRange | undefined) => {
+    if (range && range.from && range.to) {
+      setSelectedRange({ from: range.from, to: range.to });
+    } else {
+      setSelectedRange(null);
+    }
+  };
 
   const handleSearch = () => {
     if (selectedRange && guestCount) setShowRooms(true);
@@ -175,7 +186,7 @@ const DateSelector = ({ rooms }: { rooms: Room[] }) => {
             <DayPicker
               disabled={{ before: new Date() }}
               mode="range"
-              selected={selectedRange}
+              selected={selectedRange || undefined}
               onSelect={handleSelect}
               className="border rounded-md bg-white/20"
             />

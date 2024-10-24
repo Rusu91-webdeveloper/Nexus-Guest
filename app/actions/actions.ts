@@ -17,6 +17,25 @@ import {
   //Review
 } from "./TypesAndValidators";
 
+// export async function getData(): Promise<Room[]> {
+//   try {
+//     const client = await clientPromise;
+//     const db = client.db("Nexus02");
+
+//     const data = await db.collection<Room>("rooms").find({}).toArray();
+
+//     return data
+//       .filter((room) => room._id) // Ensure that _id is defined
+//       .map((room) => ({
+//         ...room,
+//         _id: room._id.toString(), // Convert ObjectId to string
+//       }));
+//   } catch (e) {
+//     console.error(e);
+//     throw new Error("Failed to fetch data");
+//   }
+// }
+
 export async function getData(): Promise<Room[]> {
   try {
     const client = await clientPromise;
@@ -26,7 +45,7 @@ export async function getData(): Promise<Room[]> {
 
     return data.map((room) => ({
       ...room,
-      _id: room._id.toString(), // Convert ObjectId to string
+      _id: room._id ? room._id.toString() : "undefined-id", // Fallback for undefined _id
     }));
   } catch (e) {
     console.error(e);

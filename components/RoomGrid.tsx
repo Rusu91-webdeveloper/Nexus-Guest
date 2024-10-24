@@ -42,7 +42,13 @@ export const RoomGrid = async () => {
       {cards.map(
         (room) =>
           room && (
-            <RoomCard key={room._id} room={room} destination="/dashboard" />
+            <RoomCard
+              key={
+                typeof room._id === "object" ? room._id.toString() : room._id
+              }
+              room={room}
+              destination="/dashboard"
+            />
           )
       )}
     </div>

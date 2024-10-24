@@ -1,5 +1,11 @@
 import { getRoom } from "@/app/actions/actions";
-import { CalendarDays, Users, BedDouble, DollarSign } from "lucide-react";
+import {
+  CalendarDays,
+  Users,
+  BedDouble,
+  DollarSign,
+  LucideIcon,
+} from "lucide-react";
 import {
   Card,
   CardContent,
@@ -19,6 +25,12 @@ interface BookingInfoProps {
   nights: number;
   from: string;
   to: string;
+}
+
+interface DateInfoProps {
+  icon: LucideIcon;
+  label: string;
+  date: string;
 }
 
 const getCachedRoom = unstable_cache(
@@ -104,7 +116,7 @@ const BookingInfo = async ({ id, nights, from, to }: BookingInfoProps) => {
   );
 };
 
-const DateInfo = ({ icon: Icon, label, date }) => (
+const DateInfo = ({ icon: Icon, label, date }: DateInfoProps) => (
   <div className="flex items-center space-x-2">
     <Icon className="h-4 w-4 text-muted-foreground" />
     <div>
@@ -116,7 +128,11 @@ const DateInfo = ({ icon: Icon, label, date }) => (
   </div>
 );
 
-const ErrorCard = ({ message }) => (
+interface ErrorCardProps {
+  message: string;
+}
+
+const ErrorCard = ({ message }: ErrorCardProps) => (
   <Card className="w-full max-w-md">
     <CardHeader>
       <CardTitle className="text-destructive">Error</CardTitle>
