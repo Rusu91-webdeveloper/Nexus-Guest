@@ -3,14 +3,21 @@
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import RoomDetails from "@/components/RoomDetails"; // Import RoomDetails to handle rendering
+import { Room } from "@/app/actions/TypesAndValidators";
+
+interface ScrollToDetailsButtonProps {
+  initialShowDetails: boolean;
+  roomId: string;
+  room: Room; // Use the Room type here
+}
 
 export default function ScrollToDetailsButton({
   initialShowDetails,
   roomId,
   room,
-}) {
+}: ScrollToDetailsButtonProps) {
   const [showDetails, setShowDetails] = useState(initialShowDetails);
-  const detailsRef = useRef(null);
+  const detailsRef = useRef<HTMLDivElement | null>(null);
 
   const handleScrollToDetails = () => {
     setShowDetails((prev) => !prev); // Toggle the state

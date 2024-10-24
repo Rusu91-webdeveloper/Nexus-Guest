@@ -5,10 +5,11 @@ import { PiMonitor } from "react-icons/pi";
 import MainLayout from "../main-layout";
 import LoadingSpinner from "@/components/Loading";
 import { FeatureCard } from "@/components/FeatureCard";
+import { ObjectId } from "mongodb";
 import { RoomList } from "@/components/RoomList";
 
 export type Room = {
-  _id: string;
+  _id: string | ObjectId | undefined;
   room_number: string;
   room_type: string;
   room_capacity: number;

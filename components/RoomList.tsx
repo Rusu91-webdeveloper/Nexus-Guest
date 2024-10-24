@@ -22,7 +22,11 @@ export async function RoomList() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {cards.map((room) => (
-        <RoomCard key={room._id} room={room} destination="/booking" />
+        <RoomCard
+          key={room._id ? room._id.toString() : `no-id-${room.room_number}`} // Convert _id to string or provide fallback
+          room={room}
+          destination="/booking"
+        />
       ))}
     </div>
   );

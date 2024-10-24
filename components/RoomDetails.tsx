@@ -4,19 +4,26 @@ import { motion } from "framer-motion";
 import { MdOutlineKingBed } from "react-icons/md";
 import { SlSizeActual } from "react-icons/sl";
 import { BsPeople } from "react-icons/bs";
-import { FaWifi, FaSwimmer, FaConciergeBell, FaCoffee } from "react-icons/fa"; // Example icons
 import Link from "next/link";
 import { Button } from "@/components/ui/moving-border";
+import Image from "next/image"; // Import Next.js Image component
 
-export default function RoomDetails({ room }) {
-  const amenitiesIcons = {
-    Wifi: <FaWifi />,
-    Pool: <FaSwimmer />,
-    "Room Service": <FaConciergeBell />,
-    "Free Coffee": <FaCoffee />,
-    // Add more icons as per your actual amenities
-  };
+interface Room {
+  room_number: string;
+  room_type: string;
+  room_capacity: number;
+  price_per_night: number;
+  status: string;
+  description: string;
+  pictures: string[]; // Assuming it's an array of picture URLs
+  booked_on: string[]; // Array of booked dates
+}
 
+interface RoomDetailsProps {
+  room: Room;
+}
+
+export default function RoomDetails({ room }: RoomDetailsProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -28,7 +35,7 @@ export default function RoomDetails({ room }) {
       <div className="max-w-7xl mx-auto bg-white dark:bg-neutral-900 p-8 shadow-2xl rounded-xl">
         {/* Room Title */}
         <h1 className="text-2xl sm:text-3xl font-semibold mb-4 text-neutral-800 dark:text-neutral-100 text-center">
-          {room.title}
+          Room {room.room_number} - {room.room_type}
         </h1>
 
         {/* Room Description */}
@@ -40,18 +47,18 @@ export default function RoomDetails({ room }) {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
           <div className="text-center flex flex-col items-center text-neutral-500 dark:text-neutral-400">
             <MdOutlineKingBed className="text-4xl sm:text-5xl" />
-            <h3 className="text-lg font-semibold mt-2">Beds</h3>
-            <p className="text-sm sm:text-base">{room.bed}</p>
+            <h3 className="text-lg font-semibold mt-2">Room Type</h3>
+            <p className="text-sm sm:text-base">{room.room_type}</p>
           </div>
           <div className="text-center flex flex-col items-center text-neutral-500 dark:text-neutral-400">
             <SlSizeActual className="text-4xl sm:text-5xl" />
-            <h3 className="text-lg font-semibold mt-2">Size</h3>
-            <p className="text-sm sm:text-base">{room.size}</p>
+            <h3 className="text-lg font-semibold mt-2">Price Per Night</h3>
+            <p className="text-sm sm:text-base">${room.price_per_night}</p>
           </div>
           <div className="text-center flex flex-col items-center text-neutral-500 dark:text-neutral-400">
             <BsPeople className="text-4xl sm:text-5xl" />
-            <h3 className="text-lg font-semibold mt-2">Occupancy</h3>
-            <p className="text-sm sm:text-base">{room.occupancy}</p>
+            <h3 className="text-lg font-semibold mt-2">Capacity</h3>
+            <p className="text-sm sm:text-base">{room.room_capacity} People</p>
           </div>
         </div>
 
@@ -75,25 +82,36 @@ export default function RoomDetails({ room }) {
           </Button>
         </div>
 
-        {/* Room Amenities */}
+        {/* Room Pictures */}
         <div className="mt-8">
           <h2 className="text-lg sm:text-xl font-semibold text-neutral-800 dark:text-neutral-100 mb-4 text-center">
-            Amenities
+            Pictures
           </h2>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-neutral-600 dark:text-neutral-300">
-            {room.amenities.map((item, index) => (
-              <div
-                key={index}
-                className="flex items-center justify-start space-x-2 bg-neutral-100 dark:bg-neutral-800 p-4 rounded-lg shadow-sm transition-transform duration-200 hover:-translate-y-1"
-              >
-                {/* Check if an icon is available, otherwise fallback to text */}
-                <div className="text-2xl text-amber-500">
-                  {amenitiesIcons[item] || "•"}
-                </div>
-                <p className="text-sm sm:text-base">{item}</p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {room.pictures.map((picture, index) => (
+              <div key={index} className="relative w-full h-64">
+                <Image
+                  src={picture}
+                  alt={`Room ${room.room_number} picture ${index + 1}`}
+                  fill
+                  objectFit="cover" // Ensures the image covers the container without distortion
+                  className="rounded-lg shadow-sm"
+                />
               </div>
             ))}
           </div>
+        </div>
+
+        {/* Room Booking Info */}
+        <div className="mt-8">
+          <h2 className="text-lg sm:text-xl font-semibold text-neutral-800 dark:text-neutral-100 mb-4 text-center">
+            Booking Dates
+          </h2>
+          <ul className="list-disc list-inside text-neutral-600 dark:text-neutral-300">
+            {room.booked_on.map((date, index) => (
+              <li key={index}>{new Date(date).toLocaleDateString()}</li>
+            ))}
+          </ul>
         </div>
       </div>
     </motion.div>

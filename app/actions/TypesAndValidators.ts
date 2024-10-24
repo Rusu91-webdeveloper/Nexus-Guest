@@ -2,7 +2,7 @@ import { z } from "zod";
 import { ObjectId } from "mongodb";
 
 export interface Booking {
-  _id?: ObjectId;
+  _id?: string | ObjectId;
   created_by: {
     staff_name: string;
     staff_id: string;
@@ -44,20 +44,19 @@ export const bookingSchema = z.object({
 
 export type BookingFormData = z.infer<typeof bookingSchema>;
 
-export interface Room {
-  _id?: string | ObjectId | undefined;
+export type Room = {
+  _id: string | ObjectId | undefined;
   room_number: string;
   room_type: string;
   room_capacity: number;
   price_per_night: number;
-  status: "available" | "occupied" | "maintenance";
+  status: string;
   description: string;
   booked_on: string[];
   pictures: string[];
   createdAt: string;
-  updatedAt: Date;
-  __v: number;
-}
+  updatedAt: string;
+};
 
 /* export interface Review {
   _id?: string | ObjectId | undefined;
