@@ -11,13 +11,13 @@ export default function ChatBot() {
       }}
     >
       <BubbleChat
-        chatflowid="46a008d0-ac84-40a7-9151-8ec2995c09a2"
-        apiHost="http://localhost:3000"
+        chatflowid="d756ebaa-0526-40bb-be9e-e591bb5cf852"
+        apiHost="https://flowise-0bzr.onrender.com"
         theme={{
           button: {
             backgroundColor: "hsl(var(--primary)/0.1)",
             right: 40,
-            bottom: 45,
+            bottom: 10,
             size: 60,
             iconColor: "hsl(var(--primary-foreground))",
             customIconSrc: logo.src,
