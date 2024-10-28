@@ -106,8 +106,8 @@ export default function VirtualAssistant() {
   return (
     <div className="w-full h-full">
       <FullPageChat
-             chatflowid="2fb4f10a-e9e2-46b0-af8c-b41add5d77f0",
-        apiHost={"https://flowise-0bzr.onrender.com"},
+             chatflowid="2fb4f10a-e9e2-46b0-af8c-b41add5d77f0"
+        apiHost={"https://flowise-0bzr.onrender.com"}
       />
     </div>
   );
