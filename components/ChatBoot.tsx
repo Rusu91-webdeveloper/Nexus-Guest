@@ -1,25 +1,26 @@
 import { BubbleChat } from "flowise-embed-react";
 import { CardContent } from "@/components/ui/card";
 import { Loader2 } from "lucide-react";
+import { Bot } from "lucide-react";
 import logo from "@/assets/logo.png";
 
 export default function ChatBot() {
   return (
     <CardContent
-      className="fixed bottom-4 right-8 z-50"
+      className="fixed bottom-4 right-8 z-50" // Adjusted position
       style={{
         maxWidth: "500px",
       }}
     >
       <BubbleChat
-        chatflowid="2e14baff-0132-4d8e-84e2-7c82d8d36121"
-        apiHost={"https://flowise-0bzr.onrender.com"}
+        chatflowid="217bacf3-9172-4099-a02b-10feb8a92e65"
+        apiHost="https://flowise-0bzr.onrender.com"
         theme={{
           button: {
             backgroundColor: "hsl(var(--primary)/0.1)",
-            right: 40,
-            bottom: 15,
-            size: 60,
+            right: 40, // Button position from right edge
+            bottom: 15, // Button position from bottom edge
+            size: 60, // Adjust button size
             iconColor: "hsl(var(--primary-foreground))",
             customIconSrc: logo.src,
           },
@@ -29,21 +30,21 @@ export default function ChatBot() {
             titleAvatarSrc: logo.src,
             welcomeMessage: "Welcome to Nexus! How can I assist you today?",
             backgroundColor: "hsla(var(--background) / 0.4)",
-            height: 450,
-            width: 400,
+            height: 450, // Adjusted chat window height
+            width: 400, // Adjusted chat window width
             fontSize: 14,
             poweredByTextColor: "hsl(var(--muted-foreground))",
             botMessage: {
               backgroundColor: "hsla(var(--muted) / 0.8)",
               textColor: "hsl(var(--foreground))",
               showAvatar: true,
-              avatarSrc: logo.src, // Using logo instead of Bot for avatarSrc
+              avatarSrc: logo.src,
             },
             userMessage: {
               backgroundColor: "hsla(var(--primary) / 0.8)",
               textColor: "hsl(var(--primary-foreground))",
               showAvatar: true,
-              avatarSrc: logo.src, // Adjust as needed or replace with a valid asset path
+              avatarSrc: Bot.src,
             },
             textInput: {
               placeholder: "Type your message...",
