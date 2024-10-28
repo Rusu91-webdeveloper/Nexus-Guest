@@ -122,7 +122,7 @@ const NavBarBottom = () => {
           <LogIn />
         </Link>
       </button>
-      <ChatBot />
+//      <ChatBot />
     </nav>
   );
 };
