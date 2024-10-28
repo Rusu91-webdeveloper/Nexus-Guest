@@ -1,10 +1,10 @@
 import { BubbleChat } from "flowise-embed-react";
-import { CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import logo from "@/assets/logo.png";
 
 export default function ChatBot() {
   return (
-    <CardContent
+    <Card
       className="fixed bottom-4 right-8 z-50"
       style={{
         maxWidth: "500px",
@@ -59,6 +59,6 @@ export default function ChatBot() {
           },
         }}
       />
-    </CardContent>
+    </Card>
   );
 }
