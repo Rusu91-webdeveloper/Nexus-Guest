@@ -11,7 +11,7 @@ import { motion } from "framer-motion";
 import map from "@/assets/map.png"; // Replace with your actual hotel image
 import mapNexus from "@/assets/mapNexus.png"; // Replace with your actual map screenshot
 import Link from "next/link";
-import ChatBot from "./ChatBoot";
+//import ChatBot from "./ChatBoot";
 
 const NavBarBottom = () => {
   return (
