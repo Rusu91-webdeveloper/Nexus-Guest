@@ -1,8 +1,12 @@
-# Nexus Hotel Management System
+# Nexus Hotel Guest 
 
 ## Project Overview
 
-The Nexus Hotel Management System is a comprehensive web application designed to streamline hotel operations, enhance guest experiences, and provide efficient booking management. Built with modern web technologies, this system offers a user-friendly interface for both hotel staff and guests.
+
+ • We chose Next.js because it’s fast and SEO-friendly, helping us reach new guests while providing them with a seamless experience.
+ • We’ve also used server actions to interact directly with the database, reducing API calls and speeding up the site.
+
+This platform offers real-time booking and personalized dashboards, making it easy for guests to find what they need and book with confidence. Our aim is to provide them with a smooth, enjoyable experience 
 
 ## Key Features
 
@@ -71,6 +75,4 @@ The project follows a typical Next.js structure with some custom organization:
 7. **User Profile**
    - Users can manage their profile information and view past bookings
 
-## Conclusion
 
-The Nexus Hotel Management System provides a comprehensive solution for hotel operations and guest management. Its modular structure and use of modern web technologies make it scalable and maintainable. The system's focus on user experience, both for staff and guests, ensures efficient hotel management and improved customer satisfaction.
